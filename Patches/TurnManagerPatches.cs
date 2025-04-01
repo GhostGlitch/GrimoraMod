@@ -22,7 +22,9 @@ public class TurnManagerPatches
 		{
 			yield return ResourcesManager.Instance.AddBones(25);
 		}
-		if (GrimoraRunState.CurrentRun != null) {
+		if (GrimoraSaveUtil.IsNotGrimoraModRun) {
+			Log.LogInfo("[SetupPhase] Skipping Grimora-specific logic – not a Grimora run");
+		} else {
 			bool drawPile3DIsActive = CardDrawPiles3D.Instance && CardDrawPiles3D.Instance.pile;
 	
 			if (GrimoraRunState.CurrentRun.riggedDraws.Contains("Boon_StartingDraw"))
@@ -70,8 +72,6 @@ public class TurnManagerPatches
 				if (AscensionSaveData.Data.ChallengeIsActive(ChallengeManagement.NoBones) && GrimoraRunState.CurrentRun.regionTier > 0) ChallengeActivationUI.TryShowActivation(ChallengeManagement.NoBones);
 				Log.LogInfo($"{SaveFile.IsAscension } +  {AscensionSaveData.Data.ChallengeIsActive(ChallengeManagement.NoBones)}");
 			}
-		} else {
-			Log.LogInfo("[SetupPhase] Skipping Grimora-specific logic – no active Grimora run.");
 		}
 	}
 
