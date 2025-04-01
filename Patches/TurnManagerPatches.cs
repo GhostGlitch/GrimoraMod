@@ -18,6 +18,10 @@ public class TurnManagerPatches
 	)
 	{
 		yield return enumerator;
+		if (GrimoraRunState.CurrentRun == null) {
+			Log.LogDebug("[GrimoraMod] Skipping SetupPhase additions – CurrentRun is null.");
+			yield break;
+		}
 		if (ConfigHelper.Instance.IsDevModeEnabled)
 		{
 			yield return ResourcesManager.Instance.AddBones(25);
